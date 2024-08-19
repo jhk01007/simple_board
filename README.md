@@ -1,16 +1,35 @@
 # 게시판 만들기
 
-# 개요
+# ✅ 개요
 
 - 회원가입과 로그인을 하고 글을 CRUD 하는 간단한 구조의 게시판.
 - Tomcat 기반의 Servlet, JSP를 활용한 MVC 패턴을 통해 구현한다.
 - RDBMS는 MySQL을 사용한다.
 
-# 아키텍처
+# ✅ 아키텍처
 
 ![1](https://github.com/user-attachments/assets/0dddb38a-b0c7-4dca-a514-e50b0e5effae)
 
-# 주요 화면
+# ✅ 환경 설정
+
+- WAS: Tomcat 10.1.28
+- build: maven
+- RDBMS: MySQL 8.4.0
+- RDBMS Connector: MySQL-Connector: 9.0.0
+    
+    ```xml
+    <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
+    <dependency>
+        <groupId>com.mysql</groupId>
+        <artifactId>mysql-connector-j</artifactId>
+        <version>9.0.0</version>
+    </dependency> 
+    ```
+    
+    [Maven Repository: com.mysql » mysql-connector-j](https://mvnrepository.com/artifact/com.mysql/mysql-connector-j)<br><br>
+
+  
+# ✅ 주요 화면
 
 ## 1️⃣ 회원가입
 
