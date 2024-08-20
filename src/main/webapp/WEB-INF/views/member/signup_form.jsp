@@ -48,7 +48,7 @@
 <body>
 <div class="form-container">
     <h2>회원가입</h2>
-    <form action="${pageContext.request.contextPath}/signup" method="post">
+    <form action="${pageContext.request.contextPath}/members/signup" method="post">
         <input type="text" name="memberid" placeholder="아이디" required>
         <input type="password" name="password" placeholder="비밀번호" required>
         <input type="submit" value="회원가입">

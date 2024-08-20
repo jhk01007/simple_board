@@ -11,7 +11,7 @@ import java.io.IOException;
 import static org.example.day0819_board_project.constant.Alert.alertAndRedirect;
 import static org.example.day0819_board_project.constant.ViewsPath.*;
 
-@WebServlet("/login")
+@WebServlet("/members/login")
 public class LoginServlet extends HttpServlet {
 
     private MemberService memberService = MemberService.getInstance();

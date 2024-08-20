@@ -45,7 +45,7 @@
     <h1><%=request.getAttribute("login")%>님 환영합니다.</h1>
     <a href="<%=request.getContextPath()%>/boards" class="btn">목록 보기</a>
     <a href="${pageContext.request.contextPath}/boards/write" class="btn">글 작성하기</a>
-    <a href="${pageContext.request.contextPath}/logout" class="btn">로그아웃 하기</a>
+    <a href="${pageContext.request.contextPath}/members/logout" class="btn">로그아웃 하기</a>
 </div>
 </body>
 </html>

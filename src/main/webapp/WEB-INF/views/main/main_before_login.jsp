@@ -44,8 +44,8 @@
 <div class="container">
     <h1>저희 OO 게시판을 찾아주셔서 감사합니다.</h1>
     <a href="<%=request.getContextPath()%>/boards" class="btn">목록 보기</a>
-    <a href="${pageContext.request.contextPath}/login" class="btn">로그인 하기</a>
-    <a href="${pageContext.request.contextPath}/signup" class="btn">회원가입 하기</a>
+    <a href="${pageContext.request.contextPath}/members/login" class="btn">로그인 하기</a>
+    <a href="${pageContext.request.contextPath}/members/signup" class="btn">회원가입 하기</a>
 </div>
 </body>
 </html>

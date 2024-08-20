@@ -13,7 +13,7 @@ import java.io.IOException;
 
 import static org.example.day0819_board_project.constant.ViewsPath.*;
 
-@WebServlet("/logout")
+@WebServlet("/members/logout")
 public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

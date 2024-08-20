@@ -66,7 +66,7 @@
 %>
 <div class="form-container">
     <h2>로그인</h2>
-    <form action="<%=request.getContextPath()%>/login" method="post">
+    <form action="<%=request.getContextPath()%>/members/login" method="post">
         <input type="text" name="memberid" placeholder="아이디" value="<%=default_id%>" required>
         <input type="password" name="password" placeholder="비밀번호" required>
         <div class="remember-me">
