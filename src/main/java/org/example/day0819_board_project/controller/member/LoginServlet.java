@@ -7,6 +7,7 @@ import org.example.day0819_board_project.exception.LoginException;
 import org.example.day0819_board_project.service.MemberService;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import static org.example.day0819_board_project.constant.Alert.alertAndRedirect;
 import static org.example.day0819_board_project.constant.ViewsPath.*;
@@ -35,8 +36,10 @@ public class LoginServlet extends HttpServlet {
             if (rememberMe != null)
                 resp.addCookie(getRememberIdCookie(memberId));
             // 체크 해제시 기존의 저장된 쿠키 무효화
-            else
-                resp.addCookie(invalidateRememberIdCookie(req.getCookies()));
+            else {
+                Optional<Cookie> invalidatedCookie = Optional.ofNullable(invalidateRememberIdCookie(req.getCookies()));
+                invalidatedCookie.ifPresent(resp::addCookie);
+            }
 
             alertAndRedirect(req, memberId + "님 환영합니다.", req.getContextPath(), resp);
         } catch (LoginException e) {

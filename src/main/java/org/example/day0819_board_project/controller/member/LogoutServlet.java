@@ -16,7 +16,7 @@ import static org.example.day0819_board_project.constant.ViewsPath.*;
 @WebServlet("/members/logout")
 public class LogoutServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         session.invalidate();
         Alert.alertAndRedirect(req, "로그아웃 되었습니다.", req.getContextPath(), resp);

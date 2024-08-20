@@ -16,7 +16,7 @@ public class MainServlet extends HttpServlet {
         // 세션이 있다면 회원전용 페이지로
         if(login != null) {
             req.setAttribute("login", login.toString());
-            req.getRequestDispatcher(ViewsPath.ROOT + "main/main_after_login.jsp").forward(req, resp);
+                req.getRequestDispatcher(ViewsPath.ROOT + "main/main_after_login.jsp").forward(req, resp);
         }
         // 세션이 없다면 비회원전용 페이지로
         else
