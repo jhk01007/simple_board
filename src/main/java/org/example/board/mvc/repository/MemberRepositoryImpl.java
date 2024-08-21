@@ -4,21 +4,15 @@ package org.example.board.mvc.repository;
 import org.example.board.domain.Member;
 import org.example.board.exception.IdDuplicateException;
 import org.example.board.DBUtil;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class MemberRepositoryImpl implements MemberRepository {
-    private MemberRepositoryImpl() {
-    }
-
-    private static MemberRepositoryImpl memberRepository = new MemberRepositoryImpl();
-
-    public static MemberRepositoryImpl getInstance() {
-        return memberRepository;
-    }
 
     private Connection conn;
     private PreparedStatement ps;

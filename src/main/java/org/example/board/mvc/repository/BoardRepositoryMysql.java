@@ -3,6 +3,7 @@ package org.example.board.mvc.repository;
 
 import org.example.board.domain.Board;
 import org.example.board.DBUtil;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,13 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class BoardRepositoryMysql implements BoardRepository {
-    private BoardRepositoryMysql(){}
-    private static BoardRepository instance = new BoardRepositoryMysql();
-    public static BoardRepository getInstance() {
-        return instance;
-    }
-    //    private static final String INSERT_SQL = "INSERT INTO INTO BOARD_TB(TITLE,WRITER,CONTENT,REG_DATE) VALUES(?,?,?,NOW())";
 
     private Connection conn;
     private PreparedStatement ps;

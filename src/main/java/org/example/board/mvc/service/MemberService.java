@@ -6,21 +6,18 @@ import org.example.board.domain.Member;
 import org.example.board.exception.LoginException;
 import org.example.board.mvc.repository.MemberRepository;
 import org.example.board.mvc.repository.MemberRepositoryImpl;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class MemberService {
 
-    private MemberService() {
-    }
 
-    private static MemberService memberService = new MemberService();
+    private MemberRepository memberRepository;
 
-
-    private MemberRepository memberRepository = MemberRepositoryImpl.getInstance();
-
-    public static MemberService getInstance() {
-        return memberService;
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
     /**

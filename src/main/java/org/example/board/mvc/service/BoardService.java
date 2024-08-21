@@ -6,19 +6,18 @@ import org.example.board.domain.Board;
 import org.example.board.exception.BoardNotFoundException;
 import org.example.board.mvc.repository.BoardRepository;
 import org.example.board.mvc.repository.BoardRepositoryMysql;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 // SQL 실행은 리포지토리가 담당하고 나는 뭘 검사하고 판단하고 조작해내는 비즈니스 로직
+@Service
 public class BoardService {
-    private BoardRepository repo = BoardRepositoryMysql.getInstance();
+    private BoardRepository repo;
 
-    private BoardService(){}
-
-    private static BoardService instance = new BoardService();
-    public static BoardService getInstance() {
-        return instance;
+    public BoardService(BoardRepository repo) {
+        this.repo = repo;
     }
 
     // 글 읽기 수행할 때 작성자와 읽는 사용자가 일치하는지 검사해서 조회수 증가 update 여부를 판단하거나
