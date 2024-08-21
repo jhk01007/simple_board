@@ -1,23 +1,24 @@
 package org.example.board.mvc.controller;
 
-
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-// /main
-public class MainController implements MyController{
-    @Override
-    public String process(HttpServletRequest req, HttpServletResponse resp) {
+@Controller
+@RequestMapping("/main")
+public class MainController {
+
+    @GetMapping
+    public String mainPage(HttpServletRequest req) {
         HttpSession session = req.getSession();
         Object login = session.getAttribute("login");
-        // 세션이 있다면 회원전용 페이지로
+
         if(login != null) {
             req.setAttribute("login", login.toString());
             return "main/main_after_login";
-        }
-        // 세션이 없다면 비회원전용 페이지로
-        else
+        } else
             return "main/main_before_login";
     }
 }
