@@ -29,7 +29,6 @@ public class BoardController {
 
     @GetMapping
     public ModelAndView getBoardsList() {
-        System.out.println("여기2");
         List<Board> boards = boardService.getBoards();
         ModelAndView modelAndView = new ModelAndView("board/board_list");
         modelAndView.addObject("boards", boards);
@@ -40,7 +39,6 @@ public class BoardController {
 
     @GetMapping("/{board_id}")
     public ModelAndView getBoardInfo(@PathVariable("board_id") Long board_id) {
-        System.out.println("여기");
         ModelAndView modelAndView = new ModelAndView();
         try {
             Board board = boardService.read(board_id);
@@ -58,19 +56,7 @@ public class BoardController {
     @GetMapping("/write")
     public ModelAndView writeForm(HttpSession session) {
         ModelAndView modelAndView = new ModelAndView();
-        try {
-            // 로그인 된 사용자인지 체크
-            String login = (String) session.getAttribute("login");
-
-            //로그인된 사용자라면 글 작성 가능
-            if (login == null)
-                throw new AuthenticatedException("글을 작성할 권한이 없습니다. 로그인을 해주세요.");
-
-            modelAndView.setViewName("board/write_form");
-        } catch (AuthenticatedException e) {
-            setAlertInfo(modelAndView, e.getMessage(), CONTEXT_PATH);
-            modelAndView.setViewName("alert");
-        }
+        modelAndView.setViewName("board/write_form");
 
         return modelAndView;
     }
@@ -136,7 +122,7 @@ public class BoardController {
 
             setAlertInfo(modelAndView, "수정되었습니다.", CONTEXT_PATH + "/boards/" + board_id);
         } catch (BoardNotFoundException | AuthenticatedException e) {
-            setAlertInfo(modelAndView, e.getMessage(), CONTEXT_PATH );
+            setAlertInfo(modelAndView, e.getMessage(), CONTEXT_PATH);
         }
         return modelAndView;
     }
@@ -154,7 +140,7 @@ public class BoardController {
             boardService.delete(board_id);
             setAlertInfo(modelAndView, "삭제되었습니다.", CONTEXT_PATH + "/boards");
         } catch (BoardNotFoundException | AuthenticatedException e) {
-            setAlertInfo(modelAndView, e.getMessage(),CONTEXT_PATH + "/boards");
+            setAlertInfo(modelAndView, e.getMessage(), CONTEXT_PATH + "/boards");
         }
 
         return modelAndView;

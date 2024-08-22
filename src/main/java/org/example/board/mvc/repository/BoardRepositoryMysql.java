@@ -93,7 +93,6 @@ public class BoardRepositoryMysql implements BoardRepository {
             sql = sql.substring(0, sql.length()-2);
 
             sql += " WHERE id = "+board.getId();
-            System.out.println(sql);
             conn = DBUtil.getConnection();
             ps = conn.prepareStatement(sql);
             result = ps.executeUpdate();
