@@ -4,7 +4,7 @@
 
 - 회원가입과 로그인을 하고 글을 CRUD 하는 간단한 구조의 게시판.
 - Tomcat 기반의 Servlet, JSP를 활용한 MVC 패턴을 통해 구현한다.
-- RDBMS는 MySQL을 사용한다.
+- RDBMS는 MySQL을 사용한다..
 
 # ✅ 아키텍처
 
