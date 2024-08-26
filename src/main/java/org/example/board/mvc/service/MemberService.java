@@ -5,7 +5,6 @@ package org.example.board.mvc.service;
 import org.example.board.domain.Member;
 import org.example.board.exception.LoginException;
 import org.example.board.mvc.repository.MemberRepository;
-import org.example.board.mvc.repository.MemberRepositoryImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

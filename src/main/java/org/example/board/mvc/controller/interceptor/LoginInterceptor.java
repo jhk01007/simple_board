@@ -1,8 +1,7 @@
-package org.example.board.interceptor;
+package org.example.board.mvc.controller.interceptor;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.board.util.Alert;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 

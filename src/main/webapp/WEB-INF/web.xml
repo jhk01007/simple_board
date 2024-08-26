@@ -4,17 +4,27 @@
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
 
-    <!-- Error page for 404 (Page Not Found) -->
-    <error-page>
-        <error-code>404</error-code>
-        <location>/WEB-INF/views/error/404.jsp</location>
-    </error-page>
+<!--    <error-page>-->
+<!--        <error-code>404</error-code>-->
+<!--        <location>/WEB-INF/views/error/404.jsp</location>-->
+<!--    </error-page>-->
 
-    <!-- Error page for 500 (Internal Server Error) -->
-    <error-page>
-        <error-code>500</error-code>
-        <location>/WEB-INF/views/error/500.jsp</location>
-    </error-page>
+<!--    <error-page>-->
+<!--        <error-code>500</error-code>-->
+<!--        <location>/WEB-INF/views/error/500.jsp</location>-->
+<!--    </error-page>-->
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/spring/root-context.xml</param-value>
+    </context-param>
+
+    <!-- dispatcher servlet context : servlet-context.xml (web요청 처리 관련 객체)-->
+    <!-- root-context.xml (model data 처리 관련 객체) -->
+    <!-- 위의 두 context가 객체를 서로 공유할수 있게 해주는 설정이 아래의 listener 임-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
     <servlet>
         <servlet-name>dispatcher</servlet-name>

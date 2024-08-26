@@ -2,6 +2,7 @@ package org.example.board.mvc.repository;
 
 
 
+import org.apache.ibatis.annotations.Mapper;
 import org.example.board.domain.Member;
 
 import java.util.List;

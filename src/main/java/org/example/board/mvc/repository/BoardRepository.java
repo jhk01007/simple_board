@@ -1,6 +1,8 @@
 package org.example.board.mvc.repository;
 
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.example.board.domain.Board;
 
 import java.util.List;

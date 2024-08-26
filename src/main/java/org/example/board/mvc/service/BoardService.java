@@ -5,7 +5,6 @@ package org.example.board.mvc.service;
 import org.example.board.domain.Board;
 import org.example.board.exception.BoardNotFoundException;
 import org.example.board.mvc.repository.BoardRepository;
-import org.example.board.mvc.repository.BoardRepositoryMysql;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -42,6 +42,7 @@ public class BoardController {
         ModelAndView modelAndView = new ModelAndView();
         try {
             Board board = boardService.read(board_id);
+            System.out.println(board);
             boardService.addReadCount(board); // 조회수 1 증가 시키기
 
             modelAndView.addObject("board", board);

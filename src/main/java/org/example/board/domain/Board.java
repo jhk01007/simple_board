@@ -10,8 +10,8 @@ public class Board {
     private Integer readCount;
     private String createdAt;
 
-    public Board() {
-    }
+//    public Board() {
+//    }
 
     public Board(String title, String content, String writer) {
         this.title = title;
