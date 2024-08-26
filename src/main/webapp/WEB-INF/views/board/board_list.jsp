@@ -88,14 +88,6 @@
 <div class="container">
     <h2>게시판 글 목록</h2>
     <table>
-        <thead>
-        <tr>
-            <th class="title">제목</th>
-            <th>작성자</th>
-            <th class="created-at">작성일</th>
-            <th>조회수</th>
-        </tr>
-        </thead>
         <tbody>
         <%
             // request에서 "pageData"라는 이름의 attribute를 가져옴
