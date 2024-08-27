@@ -6,10 +6,6 @@
 - Tomcat 기반의 Servlet, JSP를 활용한 MVC 패턴을 통해 구현한다.
 - RDBMS는 MySQL을 사용한다..
 
-# ✅ 아키텍처
-
-![1](https://github.com/user-attachments/assets/0dddb38a-b0c7-4dca-a514-e50b0e5effae)
-
 # ✅ 환경 설정
 
 - WAS: Tomcat 10.1.28
