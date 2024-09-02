@@ -1,0 +1,91 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.recipe_board.repository.RecipeRepository">
+
+    <!-- insert 메서드에 대한 매핑 -->
+    <insert id="insert" parameterType="org.example.recipe_board.domain.Recipe" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO recipe (writer_id, food_name, ingredients, process)
+        VALUES (#{writerId}, #{foodName}, #{ingredients}, #{process});
+    </insert>
+
+    <!-- update 메서드에 대한 매핑 -->
+    <update id="update" parameterType="org.example.recipe_board.domain.Recipe">
+        UPDATE recipe
+        <set>
+            <if test="foodName != null and foodName.length() > 0">food_name = #{foodName},</if>
+            <if test="writerId != null">writer_id = #{writerId},</if>
+            <if test="ingredients != null and ingredients.length() > 0">ingredients = #{ingredients},</if>
+            <if test="process != null and process.length() > 0">process = #{process},</if>
+            <if test="readCount != null">read_count = #{readCount},</if>
+        </set>
+        WHERE id = #{id};
+    </update>
+
+    <!-- delete 메서드에 대한 매핑 -->
+    <delete id="delete" parameterType="long">
+        DELETE FROM recipe WHERE id = #{id};
+    </delete>
+
+<!--    &lt;!&ndash; selectAll 메서드에 대한 매핑 &ndash;&gt;-->
+<!--    <select id="selectAll" resultType="org.example.board.domain.Board">-->
+<!--        SELECT id, title, writer_id, content, read_count, created_at-->
+<!--        FROM board;-->
+<!--    </select>-->
+
+
+
+
+    <select id="selectPageList" resultType="org.example.recipe_board.dto.join.RecipeWithServiceId">
+        SELECT R.id, service_id as writer, food_name, read_count, created_at
+        from recipe R JOIN member M
+                     ON R.writer_id = M.id
+        order by created_at desc
+        limit #{sr}, #{cnt}
+    </select>
+
+
+    <select id="selectOne" parameterType="java.lang.Long" resultMap="recipeWithServiceIdMap">
+        SELECT
+            R.id AS id,
+            R.writer_id AS writer_id,
+            M.service_id AS writer,
+            R.food_name AS foodName,
+            R.ingredients AS ingredients,
+            R.process AS process,
+            R.read_count AS readCount,
+            R.created_at AS createdAt,
+            I.id AS image_id,
+            I.original_name AS originalName,
+            I.saved_path AS savedPath
+        FROM
+            recipe R
+                JOIN member M ON R.writer_id = M.id
+                LEFT JOIN image I ON R.id = I.recipe_id
+        WHERE
+            R.id = #{id}
+    </select>
+    <resultMap id="recipeWithServiceIdMap" type="org.example.recipe_board.dto.join.RecipeWithServiceId">
+        <id property="id" column="id" />
+        <result property="writerId" column="writer_id"/>
+        <result property="writer" column="writer" />
+        <result property="foodName" column="foodName" />
+        <result property="ingredients" column="ingredients" />
+        <result property="readCount" column="readCount" />
+        <result property="createdAt" column="createdAt" />
+        <result property="process" column="process" />
+
+        <!-- Images 매핑 -->
+        <collection property="images" ofType="org.example.recipe_board.dto.ImageDTO">
+            <result property="id" column="image_id" />
+            <result property="originalName" column="originalName"/>
+            <result property="savedPath" column="savedPath"/>
+        </collection>
+    </resultMap>
+
+
+
+    <select id="selectCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM recipe;
+    </select>
+
+</mapper>
