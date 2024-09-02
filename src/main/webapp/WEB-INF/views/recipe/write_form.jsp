@@ -96,7 +96,7 @@
     </style>
     <script type="text/javascript">
         function confirmSubmission() {
-            const input = document.getElementById('uploadFile');
+            const input = document.getElementById('images');
             if (input.files.length === 0) {
                 input.remove(); // 파일 입력 요소를 제거하여 빈 파일 필드가 제출되지 않도록 함
             }
@@ -104,7 +104,7 @@
         }
 
         function updateFileName() {
-            const input = document.getElementById('uploadFile');
+            const input = document.getElementById('images');
             const fileNameDisplay = document.getElementById('fileNameDisplay');
             let fileNames = '';
 
@@ -124,19 +124,19 @@
 <body>
 <div class="container">
     <h2>글 작성하기</h2>
-    <form action="<%=request.getContextPath()%>/boards/write" method="post" enctype="multipart/form-data" onsubmit="return confirmSubmission();">
+    <form action="<%=request.getContextPath()%>/recipes/write" method="post" enctype="multipart/form-data" onsubmit="return confirmSubmission();">
         <div class="form-group">
-            <label for="title">제목</label>
-            <input type="text" id="title" name="title" required>
+            <label for="foodName">음식 이름</label>
+            <input type="text" id="foodName" name="foodName" required>
         </div>
         <div class="form-group">
-            <label for="content">내용</label>
-            <textarea id="content" name="content" required></textarea>
+            <label for="process">레시피</label>
+            <textarea id="process" name="process" required></textarea>
         </div>
         <div class="form-group">
-            <label for="uploadFile">파일 추가</label>
+            <label for="images">파일 추가</label>
             <label class="custom-file-upload">
-                <input type="file" id="uploadFile" name="uploadFile" multiple onchange="updateFileName()">
+                <input type="file" id="images" name="images" multiple onchange="updateFileName()">
                 <span>파일 선택</span>
             </label>
             <span id="fileNameDisplay" class="file-name">선택된 파일 없음</span> <!-- Display selected file names here -->

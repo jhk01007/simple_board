@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Mapper
 public interface RecipeRepository {
-    int insert(Recipe board);
+    int insert(Recipe recipe);
 //    int update(Board board, String category) throws SQLException;
     int update(Recipe recipe);
     int delete(Long id);

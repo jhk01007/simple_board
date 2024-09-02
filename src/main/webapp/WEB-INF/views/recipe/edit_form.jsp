@@ -1,4 +1,4 @@
-<%@ page import="org.example.board.domain.Board" %>
+<%@ page import="org.example.recipe_board.dto.join.RecipeWithServiceId" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -76,18 +76,18 @@
 </head>
 <body>
 <%
-    Board board = (Board) request.getAttribute("edit");
+    RecipeWithServiceId recipe = (RecipeWithServiceId) request.getAttribute("edit");
 %>
 <div class="container">
     <h2>글 수정하기</h2>
-    <form action="<%=request.getContextPath()%>/boards/edit/<%=board.getId()%>" method="post" onsubmit="return confirmUpdate();">
+    <form action="<%=request.getContextPath()%>/recipes/edit/<%=recipe.getId()%>" method="post" onsubmit="return confirmUpdate();">
         <div class="form-group">
-            <label for="title">제목</label>
-            <input type="text" id="title" name="title" value="<%= board.getTitle() %>" required>
+            <label for="foodName">제목</label>
+            <input type="text" id="foodName" name="foodName" value="<%= recipe.getFoodName() %>" required>
         </div>
         <div class="form-group">
-            <label for="content">내용</label>
-            <textarea id="content" name="content" required><%= board.getContent() %></textarea>
+            <label for="process">내용</label>
+            <textarea id="process" name="process" required><%= recipe.getProcess() %></textarea>
         </div>
         <div class="actions">
             <button type="submit" class="btn">수정</button>

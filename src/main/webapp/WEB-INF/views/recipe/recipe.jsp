@@ -75,14 +75,14 @@
         }
 
         /* New Styles for Images */
-        .image-gallery {
+        .images-gallery {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin-top: 20px;
         }
 
-        .image-gallery img {
+        .images-gallery img {
             max-width: 100%;
             border-radius: 5px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -223,11 +223,11 @@
             if (recipe.getImages() != null && !recipe.getImages().isEmpty()) {
         %>
         <!-- Start of Image Gallery -->
-        <div class="image-gallery">
+        <div class="images-gallery">
             <%
                 for (ImageDTO i : recipe.getImages()) {
             %>
-            <a href="<%=request.getContextPath()%>/boards/download?fid=<%=i.getId()%>">첨부파일 : <%=i.getOriginalName()%></a><br>
+            <a href="<%=request.getContextPath()%>/recipes/download?id=<%=i.getId()%>">첨부파일 : <%=i.getOriginalName()%></a><br>
             <%
                 }
             %>
@@ -243,12 +243,12 @@
     <div class="actions">
         <%
             Long login = (Long) session.getAttribute("login");
-            if (login != null && login.equals(recipe.getId())) {
+            if (login != null && login.equals(recipe.getWriterId())) {
         %>
-        <form action="<%=request.getContextPath()%>/boards/edit/<%=recipe.getId()%>">
+        <form action="<%=request.getContextPath()%>/recipes/edit/<%=recipe.getId()%>">
             <button type="submit" class="btn">수정하기</button>
         </form>
-        <form action="<%=request.getContextPath()%>/boards/delete/<%= recipe.getId() %>" method="post"
+        <form action="<%=request.getContextPath()%>/recipes/delete/<%= recipe.getId() %>" method="post"
               onsubmit="return confirm('정말로 삭제하시겠습니까?');">
             <button type="submit" class="btn btn-danger">삭제하기</button>
         </form>

@@ -2,11 +2,11 @@
 
 <mapper namespace="org.example.recipe_board.repository.RecipeRepository">
 
-<!--    &lt;!&ndash; insert 메서드에 대한 매핑 &ndash;&gt;-->
-<!--    <insert id="insert" parameterType="org.example.recipe_board.domain.Recipe" useGeneratedKeys="true" keyColumn="id" keyProperty="id">-->
-<!--        INSERT INTO recipe (title, writer_id, content)-->
-<!--        VALUES (#{title}, #{writerId}, #{content});-->
-<!--    </insert>-->
+    <!-- insert 메서드에 대한 매핑 -->
+    <insert id="insert" parameterType="org.example.recipe_board.domain.Recipe" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO recipe (writer_id, food_name, ingredients, process)
+        VALUES (#{writerId}, #{foodName}, #{ingredients}, #{process});
+    </insert>
 
     <!-- update 메서드에 대한 매핑 -->
     <update id="update" parameterType="org.example.recipe_board.domain.Recipe">
@@ -21,10 +21,10 @@
         WHERE id = #{id};
     </update>
 
-<!--    &lt;!&ndash; delete 메서드에 대한 매핑 &ndash;&gt;-->
-<!--    <delete id="delete" parameterType="long">-->
-<!--        DELETE FROM board WHERE id = #{id};-->
-<!--    </delete>-->
+    <!-- delete 메서드에 대한 매핑 -->
+    <delete id="delete" parameterType="long">
+        DELETE FROM recipe WHERE id = #{id};
+    </delete>
 
 <!--    &lt;!&ndash; selectAll 메서드에 대한 매핑 &ndash;&gt;-->
 <!--    <select id="selectAll" resultType="org.example.board.domain.Board">-->
@@ -47,12 +47,14 @@
     <select id="selectOne" parameterType="java.lang.Long" resultMap="recipeWithServiceIdMap">
         SELECT
             R.id AS id,
+            R.writer_id AS writer_id,
             M.service_id AS writer,
             R.food_name AS foodName,
             R.ingredients AS ingredients,
             R.process AS process,
             R.read_count AS readCount,
             R.created_at AS createdAt,
+            I.id AS image_id,
             I.original_name AS originalName,
             I.saved_path AS savedPath
         FROM
@@ -64,6 +66,7 @@
     </select>
     <resultMap id="recipeWithServiceIdMap" type="org.example.recipe_board.dto.join.RecipeWithServiceId">
         <id property="id" column="id" />
+        <result property="writerId" column="writer_id"/>
         <result property="writer" column="writer" />
         <result property="foodName" column="foodName" />
         <result property="ingredients" column="ingredients" />
@@ -73,6 +76,7 @@
 
         <!-- Images 매핑 -->
         <collection property="images" ofType="org.example.recipe_board.dto.ImageDTO">
+            <result property="id" column="image_id" />
             <result property="originalName" column="originalName"/>
             <result property="savedPath" column="savedPath"/>
         </collection>

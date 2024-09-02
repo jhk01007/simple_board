@@ -19,4 +19,12 @@ public class Recipe {
     private String createdAt;
     private List<Image> images;
     private List<Comment> comments;
+
+    public Recipe(Long id, Long writerId, String foodName, String ingredients, String process) {
+        this.id = id;
+        this.writerId = writerId;
+        this.foodName = foodName;
+        this.ingredients = ingredients;
+        this.process = process;
+    }
 }

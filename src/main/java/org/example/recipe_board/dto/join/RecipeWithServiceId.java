@@ -16,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 public class RecipeWithServiceId {
     private Long id;
+    private Long writerId;
     private String writer; // Member 테이블의 serviceId
     private String foodName;
     private String ingredients;

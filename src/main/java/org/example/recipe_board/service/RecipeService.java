@@ -1,16 +1,23 @@
 package org.example.recipe_board.service;
 
 
+import org.example.recipe_board.domain.Image;
 import org.example.recipe_board.domain.Recipe;
 import org.example.recipe_board.dto.CommentDTO;
+import org.example.recipe_board.dto.ImageDTO;
+import org.example.recipe_board.dto.WriteDto;
 import org.example.recipe_board.dto.join.RecipeWithServiceId;
 import org.example.recipe_board.exception.BoardNotFoundException;
 import org.example.recipe_board.object_mapper.CommentMapper;
 import org.example.recipe_board.object_mapper.RecipeMapper;
 import org.example.recipe_board.repository.CommentRepository;
+import org.example.recipe_board.repository.ImageRepository;
 import org.example.recipe_board.repository.RecipeRepository;
+import org.example.recipe_board.util.ImageUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,21 +28,14 @@ public class RecipeService {
     private static final int COUNT_PER_PAGE = 10; // 한 페이지당 보여줄 글의 갯수
     private final RecipeRepository recipeRepository;
     private final CommentRepository commentRepository;
+    private final ImageRepository imageRepository;
 
-    public RecipeService(RecipeRepository recipeRepository, RecipeMapper recipeMapper, CommentRepository commentRepository) {
+    public RecipeService(RecipeRepository recipeRepository, CommentRepository commentRepository, ImageRepository imageRepository) {
         this.recipeRepository = recipeRepository;
         this.commentRepository = commentRepository;
+        this.imageRepository = imageRepository;
     }
 
-
-//    private final FileRepository fileRepository;
-//    private final CommentRepository commentRepository;
-
-//    public RecipeService(BoardRepository boardRepository, FileRepository fileRepository, CommentRepository commentRepository) {
-//        this.boardRepository = boardRepository;
-//        this.fileRepository = fileRepository;
-//        this.commentRepository = commentRepository;
-//    }
 
     // 글 읽기 수행할 때 작성자와 읽는 사용자가 일치하는지 검사해서 조회수 증가
     public RecipeWithServiceId read(Long id) {
@@ -49,37 +49,41 @@ public class RecipeService {
         recipe.setReadCount(recipe.getReadCount() + 1);
         return recipeRepository.update(recipe);
     }
-//
-//    @Transactional
-//    public int write(Board board, MultipartFile[] uploadFile) throws IOException {
-//        int result =  recipeRepository.insert(board);
-//        List<FileDTO> savedFiles = FileUtil.saveFiles(uploadFile); // 폴더에 해당 파일들 저장시키고 저장정보 얻어오기
-//        System.out.println("파일 저장 완료 : "+savedFiles);
-//        System.out.println("파일 정보 디비에 기록 완료 : "+ saveFileInfos(savedFiles, board.getId()));
-//        return result;
-//    }
-//
-//    private int saveFileInfos(List<FileDTO> fileDTOList, Long board_id){ // 작성된 글 하나에 파일이 여러개 첨부될 수 있음.
-//        if(fileDTOList == null || fileDTOList.isEmpty()) return 0;
-//
-//        for(FileDTO f: fileDTOList){ // 파일이름originalName, 저장된경로savedPath만 설정되어 있으니까 게시글 번호 붙여서 insert 시켜야 됨!
-//            f.setBoardId(board_id);
-//        }
-//        return fileRepository.insertFiles(fileDTOList);
-//    }
-//
-//    public FileDTO getFileInfo(Long id){
-//        // file 다운로드 카운트를 update 한다던지 뭐 부가작업 필요하면 여기서 해야 함.
-//        return fileRepository.selectFile(id);
-//    }
-//
-//    public int edit(Board board) {
-//        return recipeRepository.update(board);
-//    }
-//
-//    public int delete(Long id) {
-//        return recipeRepository.delete(id);
-//    }
+
+    @Transactional
+    public int write(WriteDto writeDto) throws IOException {
+
+        Recipe recipe = new Recipe(null, writeDto.getWriterId(), writeDto.getFoodName(), "", writeDto.getProcess());
+        int result = recipeRepository.insert(recipe);
+        List<Image> imageList = ImageUtil.saveImages(writeDto.getImages()); // 폴더에 해당 파일들 저장시키고 저장정보 얻어오기
+        System.out.println("파일 저장 완료 : "+ imageList);
+        System.out.println("파일 정보 디비에 기록 완료 : "+ saveImageInfos(imageList, recipe.getId()));
+        return result;
+    }
+
+    private int saveImageInfos(List<Image> imageList, Long recipe_id){ // 작성된 글 하나에 파일이 여러개 첨부될 수 있음.
+        if(imageList == null || imageList.isEmpty()) return 0;
+
+        for(Image i: imageList){ // 파일이름 originalName, 저장된경로 savedPath만 설정되어 있으니까 게시글 번호 붙여서 insert 시켜야 됨!
+            i.setRecipeId(recipe_id);
+        }
+        return imageRepository.insertImages(imageList);
+    }
+
+    public ImageDTO getImageInfo(Long id){
+        // file 다운로드 카운트를 update 한다던지 뭐 부가작업 필요하면 여기서 해야 함.
+        Image image = imageRepository.selectImage(id);
+        return new ImageDTO(image.getId(), image.getRecipeId(), image.getOriginalName(), image.getSavedPath());
+    }
+
+    public int edit(RecipeWithServiceId recipeWithServiceId) {
+        Recipe recipe = new Recipe(recipeWithServiceId.getId(), recipeWithServiceId.getWriterId(), recipeWithServiceId.getFoodName(), recipeWithServiceId.getIngredients(), recipeWithServiceId.getProcess());
+        return recipeRepository.update(recipe);
+    }
+
+    public int delete(Long id) {
+        return recipeRepository.delete(id);
+    }
 //    public Board getBoardInfo(Long id) {
 //        return recipeRepository.selectOne(id).orElseThrow(() -> new BoardNotFoundException("해당 글을 찾을 수 없습니다."));
 //    }
