@@ -1,11 +1,13 @@
 package org.example.recipe_board_jpa.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
 public class CommentDTO {
     private Long id;
     private Long parentId;

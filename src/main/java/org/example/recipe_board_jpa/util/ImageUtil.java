@@ -1,6 +1,6 @@
 package org.example.recipe_board_jpa.util;
 
-import org.example.recipe_board_jpa.domain.Image;
+import org.example.recipe_board_jpa.entity.Image;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;

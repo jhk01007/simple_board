@@ -82,7 +82,7 @@ public class RecipeController {
             recipeService.write(writeDto);
             setAlertInfo(modelAndView, "글이 작성되었습니다.", "/recipes");
         } catch (AuthenticatedException e) {
-            setAlertInfo(modelAndView, e.getMessage(), "");
+            setAlertInfo(modelAndView, e.getMessage(), "/recipes");
         }
 
         return modelAndView;
@@ -101,7 +101,7 @@ public class RecipeController {
             modelAndView.addObject("edit", recipe);
             modelAndView.setViewName("recipe/edit_form");
         } catch (BoardNotFoundException | AuthenticatedException e) {
-            setAlertInfo(modelAndView, e.getMessage(), "");
+            setAlertInfo(modelAndView, e.getMessage(), "/recipes");
             modelAndView.setViewName("alert");
         }
 
@@ -117,14 +117,10 @@ public class RecipeController {
             RecipeWithServiceId recipe = recipeService.read(recipe_id);
             if (!Objects.equals(recipe.getWriterId(), login))
                 throw new AuthenticatedException("수정할 권한이 없습니다.");
-            String foodName = editDto.getFoodName();
-            String process = editDto.getProcess();
-            recipe.setFoodName(foodName);
-            recipe.setProcess(process);
-            recipeService.edit(recipe);
+            recipeService.edit(recipe_id, editDto);
             setAlertInfo(modelAndView, "수정되었습니다.",  "/recipes/" + recipe_id);
         } catch (BoardNotFoundException | AuthenticatedException e) {
-            setAlertInfo(modelAndView, e.getMessage(), "");
+            setAlertInfo(modelAndView, e.getMessage(), "/recipes");
         }
         return modelAndView;
     }

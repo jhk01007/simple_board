@@ -2,7 +2,7 @@ package org.example.recipe_board_jpa.service;
 
 
 
-import org.example.recipe_board_jpa.domain.Member;
+import org.example.recipe_board_jpa.entity.Member;
 import org.example.recipe_board_jpa.dto.LoginDTO;
 import org.example.recipe_board_jpa.dto.SignupDTO;
 import org.example.recipe_board_jpa.exception.LoginException;
@@ -30,7 +30,7 @@ public class MemberService {
 
     public void signUp(SignupDTO signupDTO) {
         Member member = memberMapper.toMember(signupDTO);
-        memberRepository.insert(member);
+        memberRepository.save(member);
     }
 
     /**
