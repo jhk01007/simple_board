@@ -1,15 +1,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.example.recipe_board.repository.RecipeRepository">
+<mapper namespace="org.example.recipe_board_jpa.repository.RecipeRepository">
 
     <!-- insert 메서드에 대한 매핑 -->
-    <insert id="insert" parameterType="org.example.recipe_board.domain.Recipe" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+    <insert id="insert" parameterType="org.example.recipe_board_jpa.domain.Recipe" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT INTO recipe (writer_id, food_name, ingredients, process)
         VALUES (#{writerId}, #{foodName}, #{ingredients}, #{process});
     </insert>
 
     <!-- update 메서드에 대한 매핑 -->
-    <update id="update" parameterType="org.example.recipe_board.domain.Recipe">
+    <update id="update" parameterType="org.example.recipe_board_jpa.domain.Recipe">
         UPDATE recipe
         <set>
             <if test="foodName != null and foodName.length() > 0">food_name = #{foodName},</if>
@@ -35,7 +35,7 @@
 
 
 
-    <select id="selectPageList" resultType="org.example.recipe_board.dto.join.RecipeWithServiceId">
+    <select id="selectPageList" resultType="org.example.recipe_board_jpa.dto.join.RecipeWithServiceId">
         SELECT R.id, service_id as writer, food_name, read_count, created_at
         from recipe R JOIN member M
                      ON R.writer_id = M.id
@@ -64,7 +64,7 @@
         WHERE
             R.id = #{id}
     </select>
-    <resultMap id="recipeWithServiceIdMap" type="org.example.recipe_board.dto.join.RecipeWithServiceId">
+    <resultMap id="recipeWithServiceIdMap" type="org.example.recipe_board_jpa.dto.join.RecipeWithServiceId">
         <id property="id" column="id" />
         <result property="writerId" column="writer_id"/>
         <result property="writer" column="writer" />
@@ -75,7 +75,7 @@
         <result property="process" column="process" />
 
         <!-- Images 매핑 -->
-        <collection property="images" ofType="org.example.recipe_board.dto.ImageDTO">
+        <collection property="images" ofType="org.example.recipe_board_jpa.dto.ImageDTO">
             <result property="id" column="image_id" />
             <result property="originalName" column="originalName"/>
             <result property="savedPath" column="savedPath"/>

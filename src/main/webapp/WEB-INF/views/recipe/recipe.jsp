@@ -1,6 +1,6 @@
 <%@ page import="java.util.List" %>
-<%@ page import="org.example.recipe_board.dto.join.RecipeWithServiceId" %>
-<%@ page import="org.example.recipe_board.dto.ImageDTO" %>
+<%@ page import="org.example.recipe_board_jpa.dto.join.RecipeWithServiceId" %>
+<%@ page import="org.example.recipe_board_jpa.dto.ImageDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

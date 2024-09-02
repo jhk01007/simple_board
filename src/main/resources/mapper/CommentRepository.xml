@@ -1,13 +1,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.example.recipe_board.repository.CommentRepository">
+<mapper namespace="org.example.recipe_board_jpa.repository.CommentRepository">
 
     <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT into comment (parent_id, recipe_id, writer_id, content)
         values(#{parentId}, #{recipeId}, #{writerId}, #{content})
     </insert>
 
-    <select id="selectListByBoardId" resultType="org.example.recipe_board.dto.CommentDTO">
+    <select id="selectListByBoardId" resultType="org.example.recipe_board_jpa.dto.CommentDTO">
         select c.id as id, c.parent_id, m.id as writer_id, m.service_id as writer, content, created_at
         from comment c LEFT JOIN member m
             on m.id = c.writer_id

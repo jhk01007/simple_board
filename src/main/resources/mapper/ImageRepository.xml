@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.example.recipe_board.repository.ImageRepository">
+<mapper namespace="org.example.recipe_board_jpa.repository.ImageRepository">
 
     <!--    이렇게 하는게 커넥션 한번 연결로 여러 데이터를 삽입하므로 리소스를 효율적으로 사용하게 되지만 데이터 되게 많으면 하나의 명령 실행시간이 너무 길어질 수 있음. -->
     <insert id="insertImages">
@@ -12,20 +12,20 @@
         </foreach>
     </insert>
 
-    <insert id="insertImage" parameterType="org.example.recipe_board.domain.Image">
+    <insert id="insertImage" parameterType="org.example.recipe_board_jpa.domain.Image">
         INSERT INTO image
             (id, recipe_id, ORIGINAL_NAME, SAVED_PATH)
         VALUES
             (#{id}, #{boardId}, #{originalName}, #{savedPath})
     </insert>
 
-    <select id="selectImages" resultType="org.example.recipe_board.domain.Image">
+    <select id="selectImages" resultType="org.example.recipe_board_jpa.domain.Image">
         SELECT id, recipe_id, ORIGINAL_NAME, SAVED_PATH
         FROM image
         WHERE recipe_id=#{recipeId}
     </select>
 
-    <select id="selectImage" resultType="org.example.recipe_board.domain.Image">
+    <select id="selectImage" resultType="org.example.recipe_board_jpa.domain.Image">
         SELECT id, recipe_id, ORIGINAL_NAME, SAVED_PATH
         FROM image
         WHERE id=#{id}

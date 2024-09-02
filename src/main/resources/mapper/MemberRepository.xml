@@ -1,27 +1,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.example.recipe_board.repository.MemberRepository">
+<mapper namespace="org.example.recipe_board_jpa.repository.MemberRepository">
 
     <!-- insert 메서드에 대응하는 SQL -->
-    <insert id="insert" parameterType="org.example.recipe_board.domain.Member">
+    <insert id="insert" parameterType="org.example.recipe_board_jpa.domain.Member">
         INSERT INTO member (service_id, password)
         VALUES (#{serviceId}, #{password})
     </insert>
 
     <!-- findAll 메서드에 대응하는 SQL -->
-<!--    <select id="findAll" resultType="org.example.recipe_board.domain.Member">-->
+<!--    <select id="findAll" resultType="org.example.recipe_board_jpa.domain.Member">-->
 <!--        SELECT id, member_id, password-->
 <!--        FROM member-->
 <!--    </select>-->
 
     <!-- findById 메서드에 대응하는 SQL -->
-    <select id="findById" parameterType="long" resultType="org.example.recipe_board.domain.Member">
+    <select id="findById" parameterType="long" resultType="org.example.recipe_board_jpa.domain.Member">
         SELECT id, service_id, password
         FROM member
         WHERE id = #{id}
     </select>
 
 
-    <select id="findByServiceId" parameterType="string" resultType="org.example.recipe_board.domain.Member">
+    <select id="findByServiceId" parameterType="string" resultType="org.example.recipe_board_jpa.domain.Member">
         SELECT id, service_id, password
         FROM member
         WHERE service_id = #{serviceId}

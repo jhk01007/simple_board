@@ -1,4 +1,4 @@
-<%@ page import="org.example.recipe_board.dto.join.RecipeWithServiceId" %>
+<%@ page import="org.example.recipe_board_jpa.dto.join.RecipeWithServiceId" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
