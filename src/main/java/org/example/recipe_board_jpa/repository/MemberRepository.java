@@ -10,11 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
-
-//    int insert(Member member);
-//    List<Member> findAll();
-//    Optional<Member> findById(Long id);
     Optional<Member> findByServiceId(String serviceId);
-
-
 }

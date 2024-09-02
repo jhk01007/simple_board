@@ -15,14 +15,6 @@ import java.util.Optional;
 
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
-//    int insert(Recipe recipe);
-////    int update(Board board, String category) throws SQLException;
-//    int update(Recipe recipe);
-//    int delete(Long id);
-//    List<Recipe> selectAll();
-//    int selectCount();
-//    List<RecipeWithServiceId> selectPageList(@Param("sr") int startRow, @Param("cnt") int count);
-//    Optional<RecipeWithServiceId> selectOne(Long id);
 
     @Query("select r from Recipe r")
     List<Recipe> selectPageList(Pageable pageable);
