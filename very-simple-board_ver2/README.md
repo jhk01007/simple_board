@@ -3,5 +3,5 @@
 해당 프로젝트에서 구조만 변경하였습니다.
 
 # 변경된 구조
-![2](https://github.com/user-attachments/assets/f835a44f-e7c4-4731-be0b-523de0db457b)
+![upgrade_mvc drawio](https://github.com/user-attachments/assets/68481c8d-fd6e-45e7-9c02-0e4a51c9162f)
 
